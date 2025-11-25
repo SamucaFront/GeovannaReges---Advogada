@@ -40,7 +40,9 @@ O site foi desenvolvido no modelo **mobile-first**, garantindo:
 
 O projeto está publicado e acessível em:
 
-👉 **https://samucafront.github.io/GeovannaReges---Advogada**
+# 🌐 Acesse o site
+ **[Clique aqui para acessar o site](https://samucafront.github.io/geovanna-reges)**
+
 
 ---
 
