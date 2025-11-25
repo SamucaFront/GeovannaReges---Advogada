@@ -1,85 +1,133 @@
-// ===== 1. Navbar scroll effect (agora funciona mesmo com menu aberto no mobile) =====
-window.addEventListener('scroll', () => {
-    const navbar = document.getElementById('navbar');
-    if (window.scrollY > 100) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-});
+// script.js - VERSÃO ESTÁVEL (substitua todo o arquivo por este)
 
-// ===== 2. Menu Mobile (hambúrguer) - FECHAR AO CLICAR EM UM LINK =====
-document.querySelector('.mobile-menu-btn').addEventListener('click', function () {
-    document.querySelector('.nav-links').classList.toggle('active');
-    this.classList.toggle('active'); // opcional: anima o ícone virando X
-});
+// Aguarda DOM pronto (mais seguro mesmo com script no final)
+document.addEventListener("DOMContentLoaded", () => {
 
-// Fechar o menu ao clicar em qualquer link (muito importante no celular!)
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        document.querySelector('.nav-links').classList.remove('active');
-        document.querySelector('.mobile-menu-btn').classList.remove('active');
-    });
-});
-
-// ===== 3. Intersection Observer para animações de entrada =====
-const observerOptions = {
-    threshold: 0.15,
-    rootMargin: '0px 0px -80px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
+    // 1. Navbar menor ao rolar
+    const navbarEl = document.getElementById("navbar");
+    window.addEventListener("scroll", () => {
+        if (!navbarEl) return;
+        if (window.scrollY > 100) {
+            navbarEl.classList.add("scrolled");
+        } else {
+            navbarEl.classList.remove("scrolled");
         }
     });
-}, observerOptions);
 
-// Observar todos os elementos que devem aparecer com animação
-document.querySelectorAll('.section-title, .sobre-text, .area-card, .timeline-item, .contato-content').forEach(el => {
-    el.classList.add('fade-in'); // garante que todos tenham a classe base
-    observer.observe(el);
-});
+    // 2. MENU MOBILE
+    const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
+    const navLinks = document.querySelector(".nav-links");
 
-// ===== 4. Smooth scroll (funciona perfeitamente com o menu mobile) =====
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        const target = document.querySelector(targetId);
+    if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener("click", () => {
+            mobileMenuBtn.classList.toggle("active");
+            navLinks.classList.toggle("active");
+        });
 
-        if (target) {
-            // Fecha o menu mobile antes de rolar (UX perfeita)
-            document.querySelector('.nav-links').classList.remove('active');
-            document.querySelector('.mobile-menu-btn').classList.remove('active');
+        document.querySelectorAll(".nav-links a").forEach(link => {
+            link.addEventListener("click", () => {
+                navLinks.classList.remove("active");
+                mobileMenuBtn.classList.remove("active");
+            });
+        });
+    }
 
-            // Pequeno delay para dar tempo do menu fechar antes do scroll
-            setTimeout(() => {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+    // 3. Animações ao aparecer (OBS: NÃO aplicamos fade-in à .contato-content)
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                }
+            });
+        },
+        { threshold: 0.15, rootMargin: "0px 0px -80px 0px" }
+    );
 
-                // Ajuste fino para compensar a navbar fixa
-                const navbarHeight = document.getElementById('navbar').offsetHeight;
-                window.scrollBy(0, -navbarHeight - 20);
-            }, 100);
+    // Liste apenas elementos que realmente devem animar
+    document.querySelectorAll(".section-title, .sobre-text, .area-card, .timeline-item")
+        .forEach(el => {
+            el.classList.add("fade-in");
+            observer.observe(el);
+        });
+
+    // 4. Smooth scroll COM OFFSET PERFEITO da navbar fixa
+    // Função utilitária para rolar até um elemento com offset da navbar
+    function scrollToElementWithOffset(targetEl, extraOffset = 10) {
+        if (!targetEl) return;
+        // recalcula altura da navbar na hora do clique (garante responsividade)
+        const nav = document.getElementById("navbar");
+        const navbarHeight = nav ? nav.offsetHeight : 0;
+        const targetPosition = targetEl.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = Math.max(0, targetPosition - navbarHeight - extraOffset);
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+        });
+    }
+
+    // Handler para todos links âncora internos (a[href^="#"])
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            // se href é somente "#" ou vazio, permitir comportamento normal
+            const href = this.getAttribute("href");
+            if (!href || href === "#") return;
+
+            const target = document.querySelector(href);
+            if (!target) return; // nada a fazer se não existir
+
+            e.preventDefault();
+
+            // Fecha menu mobile se aberto
+            navLinks?.classList.remove("active");
+            mobileMenuBtn?.classList.remove("active");
+
+            // Rola com offset
+            scrollToElementWithOffset(target, 10);
+        });
+    });
+
+    // 4b. Handler ESPECÍFICO e redundante só para o botão "Agende uma Consulta"
+    // (garante que *sempre* funcione, mesmo que outro listener dê erro)
+    const consultaBtn = document.querySelector('.cta-button');
+    if (consultaBtn) {
+        consultaBtn.addEventListener('click', function (e) {
+            // se o botão já tem href com #contato, vamos tratar a mesma forma
+            const href = this.getAttribute('href') || '#contato';
+            const target = document.querySelector(href);
+            if (!target) return;
+            e.preventDefault();
+            // usa função utilitária (recalcula navbar)
+            scrollToElementWithOffset(target, 10);
+        });
+    }
+
+    // 5. Efeito de atraso nos cards
+    document.querySelectorAll(".area-card").forEach((card, index) => {
+        card.style.transitionDelay = `${index * 0.15}s`;
+    });
+
+    // 6. Ícone hambúrguer vira X (corrigido - altera o <i>)
+    const dynamicStyle = document.createElement("style");
+    dynamicStyle.textContent = `
+        /* Troca visual do icon: quando mobile-menu-btn tiver .active, esconde .fa-bars e insere conteudo X via pseudo */
+        .mobile-menu-btn.active i.fa-bars { display: none; }
+        .mobile-menu-btn.active::after {
+            content: "\\00d7";
+            font-size: 1.4rem;
+            color: white;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
         }
+    `;
+    document.head.appendChild(dynamicStyle);
+
+    // 7. Proteção global: logs de erro para debug (opcional, remove em produção)
+    window.addEventListener('error', (ev) => {
+        // console.error('JS ERROR', ev.message, ev.filename, ev.lineno);
     });
 });
-
-// ===== 5. Animação escalonada nas cards de áreas =====
-const areaCards = document.querySelectorAll('.area-card');
-areaCards.forEach((card, index) => {
-    card.style.transitionDelay = `${index * 0.15}s`;
-});
-
-// ===== 6. (Opcional) Transformar o ícone de hambúrguer em X quando aberto =====
-const style = document.createElement('style');
-style.textContent = `
-    .mobile-menu-btn.active .fa-bars::before {
-        content: "\f00d"; /* ícone de X do Font Awesome */
-    }
-`;
-document.head.appendChild(style);
