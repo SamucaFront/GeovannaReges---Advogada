@@ -1,4 +1,4 @@
-# 🌐 Site – Geovanna Reges | Advogada
+#  Site – Geovanna Reges | Advogada
 
 Este repositório contém o código-fonte do site profissional da **Advogada Geovanna Reges**, desenvolvido para apresentar sua atuação jurídica, áreas de especialização, experiência e formas de contato.
 
@@ -26,7 +26,7 @@ Essas tecnologias garantem um carregamento rápido, fácil manutenção e compat
 
 ---
 
-## 📱 Responsividade
+##  Responsividade
 
 O site foi desenvolvido no modelo **mobile-first**, garantindo:
 
