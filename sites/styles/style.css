@@ -480,3 +480,74 @@ footer {
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
+/* ============================== */
+/* HOVERS SUAVES                  */
+/* ============================== */
+
+/* Botão CTA */
+.cta-button {
+    transition: all 0.55s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.cta-button:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 26px 65px rgba(114, 0, 38, 0.42);
+}
+
+/* Navbar links */
+.nav-links a {
+    transition: color 0.45s ease, transform 0.55s ease;
+}
+
+.nav-links a:hover {
+    transform: translateY(-2px);
+}
+
+/* Cartões (Áreas de atuação) */
+.area-card {
+    transition: all 0.55s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.area-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 28px 65px rgba(114, 0, 38, 0.18);
+}
+
+/* Contato */
+.contato-item {
+    transition: all 0.55s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.contato-item:hover {
+    transform: translateX(12px);
+    box-shadow: 0 15px 40px rgba(114, 0, 38, 0.25);
+}
+
+/* Foto / container */
+.sobre-image {
+    transition: transform 0.6s ease;
+}
+
+.sobre-image:hover {
+    transform: scale(1.03);
+}
+
+/* Timeline */
+.timeline-content {
+    transition: all 0.55s ease;
+}
+
+.timeline-item:hover .timeline-content {
+    transform: translateY(-6px);
+    box-shadow: 0 22px 55px rgba(114, 0, 38, 0.18);
+}
+
+/* Menu mobile */
+.mobile-menu-btn {
+    transition: all 0.45s ease;
+}
+
+.mobile-menu-btn:hover {
+    transform: scale(1.15);
+}
