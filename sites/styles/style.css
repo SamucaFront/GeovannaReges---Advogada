@@ -2,14 +2,15 @@
 /* RESET                          */
 /* ============================== */
 
+html {
+    scroll-behavior: smooth;
+}
+
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-html {
-    scroll-padding-top: 100px; /* CORREÇÃO: Offset automático para âncoras */
 }
 
 body {
@@ -17,9 +18,9 @@ body {
     background: #ffffff;
     color: #1e0d12;
     line-height: 1.7;
-    overflow-x: hidden !important;
-    width: 100%;
+    overflow-x: hidden;
 }
+
 
 /* ============================== */
 /* NAVBAR                         */
@@ -86,6 +87,7 @@ body {
     width: 100%;
 }
 
+
 /* ============================== */
 /* MENU HAMBÚRGUER                */
 /* ============================== */
@@ -93,35 +95,32 @@ body {
 .mobile-menu-btn {
     display: none;
     position: fixed;
-    top: 1.8rem;
-    right: 5%;
-    font-size: 1.9rem;
+    top: 15px;                    /* ← AQUI sobe o botão */
+    right: 20px;                  /* ← AQUI ajusta da borda direita */
+    transform: none;              /* ← remove o centralizador vertical */
+    font-size: 1.8rem;
     color: #720026;
     cursor: pointer;
     z-index: 1001;
-    background: rgba(255, 255, 255, 0.98);
-    width: 56px;
-    height: 56px;
+    background: white;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     align-items: center;
     justify-content: center;
-    border: 2.5px solid rgba(114, 0, 38, 0.2);
-    box-shadow: 0 4px 12px rgba(114, 0, 38, 0.18);
+    box-shadow: 0 8px 25px rgba(114, 0, 38, 0.22);
     transition: all 0.3s ease;
+    border: 2px solid rgba(114, 0, 38, 0.08);
 }
 
 .mobile-menu-btn:hover,
-.mobile-menu-btn:active {
-    transform: scale(1.12);
-    background: #720026;
-    color: white;
-    border-color: #720026;
-}
-
 .mobile-menu-btn.active {
     background: #720026;
     color: white;
+    transform: scale(1.08);
+    box-shadow: 0 12px 35px rgba(114, 0, 38, 0.35);
 }
+
 
 /* ============================== */
 /* HERO                           */
@@ -154,51 +153,22 @@ body {
     100% { transform: translate(60px, 60px); }
 }
 
-.hero-content {
-    position: relative;
-    z-index: 2;
-}
-
 .hero-content h1 {
     font-size: 3.8rem;
     font-weight: 800;
     background: linear-gradient(90deg, #ffffff, #f8f1f1);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 1rem;
 }
 
 .hero-content p {
     font-size: 1.5rem;
     opacity: 0.95;
-    margin: 1.5rem 0 2rem 0;
+    margin: 1.5rem 0;
 }
 
-.cta-button {
-    display: inline-block;
-    padding: 1rem 2.8rem;
-    background: #fff;
-    color: #720026;
-    border-radius: 50px;
-    font-weight: 700;
-    text-decoration: none;
-    box-shadow: 0 12px 35px rgba(114, 0, 38, 0.3);
-    transition: all 0.4s ease;
-    cursor: pointer;
-    border: none;
-    font-size: 1rem;
-}
 
-.cta-button:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 50px rgba(114, 0, 38, 0.4);
-    background: #f8f8f8;
-}
 
-.cta-button:active {
-    transform: translateY(-3px);
-}
 
 /* ============================== */
 /* SEÇÕES                         */
@@ -206,9 +176,6 @@ body {
 
 section {
     padding: 6rem 5%;
-    width: 100%;
-    max-width: 100vw;
-    overflow-x: hidden;
 }
 
 .section-title {
@@ -231,13 +198,10 @@ section {
     border-radius: 2px;
 }
 
+
 /* ============================== */
 /* SOBRE                          */
 /* ============================== */
-
-#sobre {
-    scroll-margin-top: 100px; /* CORREÇÃO: Espaço para navbar */
-}
 
 .sobre-content {
     display: grid;
@@ -277,13 +241,10 @@ section {
     margin-bottom: 1rem;
 }
 
+
 /* ============================== */
 /* ÁREAS DE ATUAÇÃO               */
 /* ============================== */
-
-#areas {
-    scroll-margin-top: 100px; /* CORREÇÃO: Espaço para navbar */
-}
 
 .areas-grid {
     display: grid;
@@ -320,13 +281,10 @@ section {
     margin: 1rem 0;
 }
 
-/* ============================== */
-/* EXPERIÊNCIA                    */
-/* ============================== */
 
-#experiencia {
-    scroll-margin-top: 100px; /* CORREÇÃO: Espaço para navbar */
-}
+/* ============================== */
+/* TIMELINE                       */
+/* ============================== */
 
 .experiencia-timeline {
     max-width: 900px;
@@ -345,10 +303,6 @@ section {
     background: linear-gradient(to bottom, #9d0b28, transparent);
 }
 
-.timeline-item {
-    margin-bottom: 2rem;
-}
-
 .timeline-content {
     background: #fff;
     padding: 2rem;
@@ -356,33 +310,17 @@ section {
     border-left: 5px solid #720026;
     box-shadow: 0 15px 40px rgba(114, 0, 38, 0.1);
     margin-left: 20px;
-    transition: all 0.4s ease;
-}
-
-.timeline-content:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 22px 55px rgba(114, 0, 38, 0.18);
-}
-
-.timeline-content h3 {
-    color: #720026;
-    margin-bottom: 0.5rem;
 }
 
 .timeline-content .year {
     color: #9d0b28;
     font-weight: 600;
-    display: block;
-    margin-bottom: 0.8rem;
 }
+
 
 /* ============================== */
 /* CONTATO                        */
 /* ============================== */
-
-#contato {
-    scroll-margin-top: 100px; /* CORREÇÃO PRINCIPAL: Espaço para navbar */
-}
 
 .contato-content {
     max-width: 600px;
@@ -413,21 +351,11 @@ section {
     color: white !important;
 }
 
-.contato-item strong,
-.contato-item span {
-    transition: color 0.3s;
-}
-
-.contato-item:hover strong,
-.contato-item:hover span {
-    color: white !important;
-}
-
 .contato-icon i {
     font-size: 1.8rem;
     color: #720026;
-    transition: color 0.3s;
 }
+
 
 /* ============================== */
 /* FOOTER                         */
@@ -438,8 +366,8 @@ footer {
     color: #f8f1f1;
     text-align: center;
     padding: 2.5rem 5%;
-    font-size: 0.95rem;
 }
+
 
 /* ============================== */
 /* ANIMAÇÕES                      */
@@ -456,11 +384,14 @@ footer {
     transform: translateY(0);
 }
 
+
 /* ============================== */
 /* RESPONSIVIDADE                 */
 /* ============================== */
 
+/* <= 868px */
 @media (max-width: 868px) {
+
     .mobile-menu-btn {
         display: flex !important;
     }
@@ -492,32 +423,36 @@ footer {
         transform: translateX(0);
     }
 
-    .nav-links li {
+    .nav-links a {
         opacity: 0;
         transform: translateY(30px);
         transition: all 0.6s;
     }
 
-    .nav-links.active li {
+    .nav-links.active a {
         opacity: 1;
         transform: translateY(0);
     }
 
-    .nav-links.active li:nth-child(1) { transition-delay: 0.1s; }
-    .nav-links.active li:nth-child(2) { transition-delay: 0.2s; }
-    .nav-links.active li:nth-child(3) { transition-delay: 0.3s; }
-    .nav-links.active li:nth-child(4) { transition-delay: 0.4s; }
-    .nav-links.active li:nth-child(5) { transition-delay: 0.5s; }
+    .nav-links a:nth-child(1) { transition-delay: 0.1s; }
+    .nav-links a:nth-child(2) { transition-delay: 0.2s; }
+    .nav-links a:nth-child(3) { transition-delay: 0.3s; }
+    .nav-links a:nth-child(4) { transition-delay: 0.4s; }
+    .nav-links a:nth-child(5) { transition-delay: 0.5s; }
 
-    .hero-content h1 { font-size: 2.8rem; }
-    .hero-content p { font-size: 1.3rem; }
-    
-    section {
-        padding: 4rem 5%;
+    .hero-content h1 {
+        font-size: 2.8rem;
+    }
+
+    .hero-content p {
+        font-size: 1.3rem;
     }
 }
 
+
+/* >= 769px */
 @media (min-width: 769px) {
+
     .sobre-content {
         grid-template-columns: 1fr 1fr;
         text-align: left;
@@ -533,13 +468,7 @@ footer {
     }
 
     .timeline-item:nth-child(odd) .timeline-content {
-        margin-right: auto;
-        margin-left: 0;
-    }
-
-    .timeline-item:nth-child(even) .timeline-content {
         margin-left: auto;
-        margin-right: 0;
     }
 
     .timeline-content {
@@ -547,27 +476,74 @@ footer {
     }
 }
 
+
+/* >= 1024px */
 @media (min-width: 1024px) {
+
     .areas-grid {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
-/* ============================== */
-/* CORREÇÃO SCROLL HORIZONTAL     */
-/* ============================== */
-
-html, body {
-    max-width: 100%;
-    overflow-x: hidden !important;
+/* ========================================= */
+/* BOTÃO NOVO DENTRO DA HERO - SUPER MODERNO */
+/* ========================================= */
+.hero-cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 2.5rem;
+    padding: 1.1rem 2.8rem;
+    background: rgba(255, 255, 255, 0.18);
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    border-radius: 50px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
-* {
-    max-width: 100%;
+.hero-cta-button:hover {
+    background: white;
+    color: #720026;
+    transform: translateY(-6px);
+    border-color: white;
+    box-shadow: 0 20px 50px rgba(114, 0, 38, 0.4);
 }
 
-/* Garante que nenhum elemento cause overflow */
-.hero, section, #navbar, footer {
-    max-width: 100vw;
-    overflow-x: hidden;
+.hero-cta-button i {
+    font-size: 1.3rem;
+    transition: transform 0.4s;
 }
+
+.hero-cta-button:hover i {
+    transform: translateX(8px);
+}
+
+/* Mobile – deixa mais compacto e bonito */
+@media (max-width: 768px) {
+    .hero-cta-button {
+        padding: 1rem 2.2rem;
+        font-size: 1rem;
+        margin-top: 2rem;
+    }
+}
+
+/* ========================================= */
+/* COR DOS TÍTULOS NA TIMELINE (VERMELHO BORDÔ) */
+/* ========================================= */
+.timeline-content h3 {
+    color: #720026 !important;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+/* Opcional: deixar os anos um tom mais escuro do bordô (fica lindo) */
+.timeline-content .year {
+    color: #9d0b28;
+    font-weight: 700;
+}
+
